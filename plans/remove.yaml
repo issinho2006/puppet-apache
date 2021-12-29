@@ -1,0 +1,16 @@
+steps:
+  - task: apache::ctl
+    target: centos.mylabserver.com
+    description: "Shut Down Apache Service"
+    parameters:
+      command: graceful-stop
+  - command: "cp /etc/httpd/log/access_log /tmp/apache_access"
+    targt: centos.mylabserver.com
+    description: "Copy Apache access logs"
+  - task: package
+    target: centos.mylabserver.com
+    description: "Remove Apache"
+    parameters:
+      action: uninstall
+      name: httpd
+
